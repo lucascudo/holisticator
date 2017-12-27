@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const config = require('../config/app');
-const User = require("../models/user");
+const config = require('../../config/app');
+const User = require("./user_model");
 
 module.exports = {
 

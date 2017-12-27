@@ -3,9 +3,9 @@ const imageType = require('image-type');
 const readChunk = require('read-chunk');
 const fs = require('fs');
 
-const config = require('../config/app');
-const Pokemon = require('../models/pokemon');
-const getToken = require('../utils/get_token');
+const config = require('../../config/app');
+const getToken = require('../../utils/get_token');
+const Pokemon = require('./pokemon_model');
 
 const toTeamRocket = 'That pokemon is not yours!';
 

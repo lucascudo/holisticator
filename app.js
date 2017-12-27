@@ -10,7 +10,8 @@ const passport = require('passport');
 const fileUpload = require('express-fileupload');
 
 const config = require('./config/app');
-const apiRoutes = require('./routes/api');
+const pokemonRoutes = require('./modules/pokemon/pokemon_routes');
+const userRoutes = require('./modules/user/user_routes');
 const app = express();
 
 mongoose.Promise = global.Promise;
@@ -35,7 +36,8 @@ app
 .set('views', path.join(__dirname, 'views'))
 .set('view engine', 'jade')
 
-.use('/api', apiRoutes)
+.use('/api', userRoutes)
+.use('/api', pokemonRoutes)
 .get('/', (req, res) => res.send('PokeStore is running!'))
 // catch 404 and forward to error handler
 .use((req, res, next) => {
