@@ -1,0 +1,217 @@
+{
+	"info": {
+		"name": "pokestore",
+		"_postman_id": "4240b81b-96dc-ba50-af77-44a32c73efed",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"lucasrochabr@outlook.com\",\n\t\"password\": \"teste\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signup"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AuthenticateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"lucasrochabr@outlook.com\",\n\t\"password\": \"teste\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"signin"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetPkmn",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTAxMDB9.Opw-Nw1P-dUDSjylk3XBRxV5DfHD_ll7R3btPMm5-2I"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/pokemon/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pokemon",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetPkmns",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYTFhODM4MjBkODRkZTA5ZjE4NDMiLCJpYXQiOjE1MTQzODE3MzZ9.g3RJJ4Znufknthiz6zSHJoJhf5LQnlxmRVEw_nujHi4"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"lucasrochabr@outlook.com\",\n\t\"password\": \"teste\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/pokemon",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pokemon"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePkmn",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYTFhODM4MjBkODRkZTA5ZjE4NDMiLCJpYXQiOjE1MTQzODE3MzZ9.g3RJJ4Znufknthiz6zSHJoJhf5LQnlxmRVEw_nujHi4"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"number\": 3,\n\t\"name\": \"Venusaur\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/pokemon",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pokemon"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePkmnImage",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYTFhODM4MjBkODRkZTA5ZjE4NDMiLCJpYXQiOjE1MTQzODE3MzZ9.g3RJJ4Znufknthiz6zSHJoJhf5LQnlxmRVEw_nujHi4"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"value": "",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/pokemon/1/image",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pokemon",
+						"1",
+						"image"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -10,3 +10,6 @@ npm install
 ```
 npm start
 ```
+
+## Test
+Import *postman_collection.json* to Postman and _voilà_!

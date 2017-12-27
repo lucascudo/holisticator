@@ -25,5 +25,15 @@ const PokemonSchema = new Schema({
     }
 });
 
+PokemonSchema.methods.format = function (omitAuthor = false) {
+  let pokemon = {
+    number: this.number,
+    name: this.name,
+    image: this.image
+  };
+  if (!omitAuthor) { pokemon.author = this.author; }
+  return pokemon;
+};
+
 PokemonSchema.plugin(integerValidator);
 module.exports = mongoose.model('Pokemon', PokemonSchema);
