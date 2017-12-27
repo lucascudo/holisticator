@@ -10,7 +10,7 @@ module.exports = (passport) => {
       secretOrKey: config.secret
   }, (jwt_payload, done) => {
     User.findOne({id: jwt_payload.id}, (err, user) => {
-        if (err) return done(err, false)
+        if (err) { return done(err, false); }
         done(null, user || false);
     });
   }));

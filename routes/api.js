@@ -12,6 +12,7 @@ router
 .get('/pokemon', passport.authenticate('jwt', { session: false}), pokemonCtl.get)
 .get('/pokemon/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.get)
 .post('/pokemon', passport.authenticate('jwt', { session: false}), pokemonCtl.create)
-.post('/pokemon/:number/image', passport.authenticate('jwt', { session: false}), pokemonCtl.updateImage);
-
+.post('/pokemon/:number/image', passport.authenticate('jwt', { session: false}), pokemonCtl.updateImage)
+.put('/pokemon/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.update)
+.delete('/pokemon/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.remove);
 module.exports = router;

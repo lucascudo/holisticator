@@ -32,7 +32,7 @@ module.exports = {
       // check if password matches
       user.comparePassword(req.body.password, (err, isMatch) => {
         return (!err && isMatch)
-          ? res.json({success: true, token: 'JWT ' + jwt.sign({_id: newUser._id}, config.secret)})
+          ? res.json({success: true, token: 'JWT ' + jwt.sign({_id: user._id}, config.secret)})
           : res.status(401).json({success: false, msg: 'Authentication failed. Wrong password.'});
       });
     });

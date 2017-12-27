@@ -43,7 +43,26 @@ module.exports = {
       newPokemon.save((err) => {
         return (err)
           ? res.json({success: false, msg: 'Pokemon creation failed.'})
-          : res.json({success: true, pokemon: pokemon.format()});
+          : res.json({success: true, pokemon: newPokemon.format()});
+      });
+    });
+  },
+
+  remove: (req, res) => {
+    const token = getToken(req.headers);
+    if (!token) {
+      return res.status(403).json({success: false, msg: 'Unauthorized.'});
+    }
+    Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
+      if (err || !pokemon) {
+        return res.json({ success: false, msg: 'Failed to delete pokemon' });
+      }
+      jwt.verify(token, config.secret, (err, user) => {
+        if (user._id != pokemon.author) {
+          return res.json({ success: false, msg: 'That pokemon is not yours' });
+        }
+        pokemon.remove();
+        return res.json({ success: true});
       });
     });
   },
@@ -67,18 +86,20 @@ module.exports = {
       if (err || !pokemon) {
         return res.json({ success: false, msg: 'Failed to update pokemon image' });
       }
-      if (token._id != pokemon.author) {
-        return res.json({ success: false, msg: 'That pokemon is not yours' });
-      }
-      const filename = pokemon.number + '.' + imgExt;
-      const filepath = __dirname + '/../public/images/' + filename;
-      fs.writeFile(filepath, buffer.toString('binary'), "binary", (err) => {
-        if (err) throw err;
-        pokemon.image = 'images/' + filename;
-        pokemon.save((err) => {
-          return (err)
-            ? res.json({ success: false, msg: 'Failed to update pokemon image' })
-            : res.json({ success: true, pokemon: pokemon.format() });
+      jwt.verify(token, config.secret, (err, user) => {
+        if (user._id != pokemon.author) {
+          return res.json({ success: false, msg: 'That pokemon is not yours' });
+        }
+        const filename = pokemon.number + '.' + imgExt;
+        const filepath = __dirname + '/../public/images/' + filename;
+        fs.writeFile(filepath, buffer.toString('binary'), "binary", (err) => {
+          if (err) throw err;
+          pokemon.image = 'images/' + filename;
+          pokemon.save((err) => {
+            return (err)
+              ? res.json({ success: false, msg: 'Failed to update pokemon image' })
+              : res.json({ success: true, pokemon: pokemon.format() });
+          });
         });
       });
     });

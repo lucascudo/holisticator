@@ -47,7 +47,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"lucasrochabr@outlook.com\",\n\t\"password\": \"teste\"\n}"
+					"raw": "{\n\t\"username\": \"lucas.sisau@gmail.com\",\n\t\"password\": \"teste\"\n}"
 				},
 				"url": {
 					"raw": "localhost:3000/api/signin",
@@ -149,7 +149,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYTFhODM4MjBkODRkZTA5ZjE4NDMiLCJpYXQiOjE1MTQzODE3MzZ9.g3RJJ4Znufknthiz6zSHJoJhf5LQnlxmRVEw_nujHi4"
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTY2NjJ9.VBwcAjw3ir68fXCsYRfpyTLfglAgAmi9RaIPn1wqut4"
 					}
 				],
 				"body": {
@@ -207,6 +207,40 @@
 						"pokemon",
 						"1",
 						"image"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePkmn",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTY2NjJ9.VBwcAjw3ir68fXCsYRfpyTLfglAgAmi9RaIPn1wqut4"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/api/pokemon/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"pokemon",
+						"3"
 					]
 				},
 				"description": ""
