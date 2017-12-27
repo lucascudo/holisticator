@@ -15,9 +15,14 @@ module.exports = {
     });
     // save the user
     newUser.save((err) => {
-      return (err)
-        ? res.json({success: false, msg: 'Username already exists.'})
-        : res.json({success: true, token: 'JWT ' + jwt.sign({_id: newUser._id}, config.secret)});
+      if (err) {
+        return res.json({success: false, msg: 'Username already exists.'})
+      }
+      const token = 'JWT ' + jwt.sign({
+          _id: newUser._id,
+          username: newUser.username,
+      }, config.secret, { expiresIn: 3600 });
+      return res.json({ success: true, token: token });
     });
   },
 
@@ -31,9 +36,14 @@ module.exports = {
       }
       // check if password matches
       user.comparePassword(req.body.password, (err, isMatch) => {
-        return (!err && isMatch)
-          ? res.json({success: true, token: 'JWT ' + jwt.sign({_id: user._id}, config.secret)})
-          : res.status(401).json({success: false, msg: 'Authentication failed. Wrong password.'});
+        if (!err && isMatch) {
+          const token = 'JWT ' + jwt.sign({
+              _id: user._id,
+              username: user.username,
+          }, config.secret, { expiresIn: 3600 });
+          return res.json({success: true, token: token});
+        }
+        return res.status(401).json({success: false, msg: 'Authentication failed.'});
       });
     });
   }
