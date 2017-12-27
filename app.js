@@ -37,7 +37,7 @@ app
 .set('view engine', 'jade')
 
 .use('/api', userRoutes)
-.use('/api', pokemonRoutes)
+.use('/api/pokemon', pokemonRoutes)
 .get('/', (req, res) => res.send('PokeStore is running!'))
 // catch 404 and forward to error handler
 .use((req, res, next) => {

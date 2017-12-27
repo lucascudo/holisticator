@@ -5,11 +5,11 @@ const pokemonCtl = require('./pokemon_controller');
 
 require('../../config/passport')(passport);
 
-router.get('/pokemon', pokemonCtl.get)
-.get('/pokemon/:number', pokemonCtl.get)
-.post('/pokemon', passport.authenticate('jwt', { session: false}), pokemonCtl.create)
-.put('/pokemon/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.update)
-.delete('/pokemon/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.remove)
-.post('/pokemon/:number/image', passport.authenticate('jwt', { session: false}), pokemonCtl.changeImage);
+router.get('/', pokemonCtl.get)
+.get('/:number', pokemonCtl.get)
+.post('/', passport.authenticate('jwt', { session: false}), pokemonCtl.create)
+.put('/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.update)
+.delete('/:number', passport.authenticate('jwt', { session: false}), pokemonCtl.remove)
+.post('/:number/image', passport.authenticate('jwt', { session: false}), pokemonCtl.changeImage);
 
 module.exports = router;
