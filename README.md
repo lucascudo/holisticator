@@ -14,7 +14,7 @@ npm start
 ## Test
 Import *postman_collection.json* to Postman and _voilà_!
 
-# All Routes
+## Routes
 
 | Verb HTTP |                Route                    | Required Authentication | Params |
 |:---------:|:---------------------------------------:|:-----------------------:|-------:|
