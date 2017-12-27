@@ -5,15 +5,12 @@ const fs = require('fs');
 
 const config = require('../config/app');
 const Pokemon = require('../models/pokemon');
-const getToken = require('./get_token');
+const getToken = require('../utils/get_token');
 
 module.exports = {
 
   get: (req, res) => {
-    const token = getToken(req.headers);
-    if (!token) {
-      return res.status(403).json({success: false, msg: 'Unauthorized.'});
-    }
+    const token = getToken(req, res);
     if (req.params.number) {
       Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
         return (err || !pokemon)
@@ -30,10 +27,7 @@ module.exports = {
   },
 
   create: (req, res) => {
-    const token = getToken(req.headers);
-    if (!token) {
-      return res.status(403).json({success: false, msg: 'Unauthorized.'});
-    }
+    const token = getToken(req, res);
     jwt.verify(token, config.secret, (err, user) => {
       const newPokemon = new Pokemon({
         number: req.body.number,
@@ -48,11 +42,29 @@ module.exports = {
     });
   },
 
+  update: (req, res) => {
+    const token = getToken(req, res);
+    Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
+      if (err || !pokemon) {
+        return res.json({ success: false, msg: 'Failed to update pokemon' });
+      }
+      jwt.verify(token, config.secret, (err, user) => {
+        if (user._id != pokemon.author) {
+          return res.json({ success: false, msg: 'That pokemon is not yours' });
+        }
+        pokemon.number = req.body.number || pokemon.number;
+        pokemon.name = req.body.name || pokemon.name;
+        pokemon.save((error) => {
+          return (error)
+            ? res.json({ success: false, msg: 'Failed to update pokemon' })
+            : res.json({ success: true, pokemon: pokemon.format() });
+        });
+      });
+    });
+  },
+
   remove: (req, res) => {
-    const token = getToken(req.headers);
-    if (!token) {
-      return res.status(403).json({success: false, msg: 'Unauthorized.'});
-    }
+    const token = getToken(req, res);
     Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
       if (err || !pokemon) {
         return res.json({ success: false, msg: 'Failed to delete pokemon' });
@@ -68,10 +80,7 @@ module.exports = {
   },
 
   updateImage: (req, res) => {
-    const token = getToken(req.headers);
-    if (!token) {
-      return res.status(403).json({success: false, msg: 'Unauthorized.'});
-    }
+    const token = getToken(req, res);
     if (!req.files || !req.files.image) {
       return res.status(400).json({ success: false, msg: "Missing image file" });
     }
@@ -94,7 +103,7 @@ module.exports = {
         const filepath = __dirname + '/../public/images/' + filename;
         fs.writeFile(filepath, buffer.toString('binary'), "binary", (err) => {
           if (err) throw err;
-          pokemon.image = 'images/' + filename;
+          pokemon.image = filename;
           pokemon.save((err) => {
             return (err)
               ? res.json({ success: false, msg: 'Failed to update pokemon image' })
