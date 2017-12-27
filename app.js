@@ -14,7 +14,7 @@ const api = require('./routes/api');
 
 const app = express();
 
-mongoose.connect(config.database);
+mongoose.connect(config.databaseUri, {useMongoClient: true});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

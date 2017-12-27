@@ -6,7 +6,7 @@ const config = require('./database');
 
 module.exports = (passport) => {
   passport.use(new JwtStrategy({
-      jwtFromRequest: ExtractJwt.fromAuthHeader(),
+      jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
       secretOrKey: config.secret
   }, (jwt_payload, done) => {
     User.findOne({id: jwt_payload.id}, (err, user) =>
