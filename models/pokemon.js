@@ -5,6 +5,7 @@ const integerValidator = require('mongoose-integer');
 const PokemonSchema = new Schema({
     number: {
         type: Number,
+        unique: true,
         integer: true,
         required: true
     },

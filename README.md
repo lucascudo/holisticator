@@ -1,5 +1,5 @@
 # node-rest-authentication
-A simple RESTful API with authentication
+A simple PokeStore RESTful API with authentication
 
 ## Setup
 ```
