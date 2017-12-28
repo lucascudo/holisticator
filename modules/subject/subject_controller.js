@@ -5,24 +5,24 @@ const fs = require('fs');
 
 const config = require('../../config/app');
 const getToken = require('../../utils/get_token');
-const Pokemon = require('./pokemon_model');
+const Subject = require('./subject_model');
 
-const toTeamRocket = 'That pokemon is not yours!';
+const toTeamRocket = 'That subject is not yours!';
 
 module.exports = {
 
   get: (req, res) => {
-    if (req.params.number) {
-      Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
-        return (err || !pokemon)
-          ? res.json({success: false, msg: 'Pokemon not found.'})
-          : res.json({success: true, pokemon: pokemon.format()});
+    if (req.params.id) {
+      Subject.findOne({id: req.params.id}, (err, subject) => {
+        return (err || !subject)
+          ? res.json({success: false, msg: 'Subject not found.'})
+          : res.json({success: true, subject: subject.format()});
       });
     } else {
-      Pokemon.find((err, pokemons) => {
-        return (err || !pokemons)
+      Subject.find((err, subjects) => {
+        return (err || !subjects)
           ? next(err)
-          : res.json(pokemons.map((pokemon) => pokemon.format(true)));
+          : res.json(subjects.map((subject) => subject.format(true)));
       });
     }
   },
@@ -30,35 +30,35 @@ module.exports = {
   create: (req, res) => {
     const token = getToken(req, res);
     jwt.verify(token, config.secret, (err, user) => {
-      const newPokemon = new Pokemon({
-        number: req.body.number,
+      const newSubject = new Subject({
+        id: req.body.id,
         name: req.body.name,
         author: user._id
       });
-      newPokemon.save((err) => {
+      newSubject.save((err) => {
         return (err)
-          ? res.json({success: false, msg: 'Failed to create pokemon.'})
-          : res.json({success: true, pokemon: newPokemon.format()});
+          ? res.json({success: false, msg: 'Failed to create subject.'})
+          : res.json({success: true, subject: newSubject.format()});
       });
     });
   },
 
   update: (req, res) => {
     const token = getToken(req, res);
-    Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
-      if (err || !pokemon) {
-        return res.json({ success: false, msg: 'Failed to update pokemon.' });
+    Subject.findOne({id: req.params.id}, (err, subject) => {
+      if (err || !subject) {
+        return res.json({ success: false, msg: 'Failed to update subject.' });
       }
       jwt.verify(token, config.secret, (err, user) => {
-        if (user._id != pokemon.author) {
+        if (user._id != subject.author) {
           return res.json({ success: false, msg: toTeamRocket });
         }
-        pokemon.number = req.body.number || pokemon.number;
-        pokemon.name = req.body.name || pokemon.name;
-        pokemon.save((error) => {
+        subject.id = req.body.id || subject.id;
+        subject.name = req.body.name || subject.name;
+        subject.save((error) => {
           return (error)
-            ? res.json({ success: false, msg: 'Failed to update pokemon.' })
-            : res.json({ success: true, pokemon: pokemon.format() });
+            ? res.json({ success: false, msg: 'Failed to update subject.' })
+            : res.json({ success: true, subject: subject.format() });
         });
       });
     });
@@ -66,15 +66,15 @@ module.exports = {
 
   remove: (req, res) => {
     const token = getToken(req, res);
-    Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
-      if (err || !pokemon) {
-        return res.json({ success: false, msg: 'Failed to delete pokemon.' });
+    Subject.findOne({id: req.params.id}, (err, subject) => {
+      if (err || !subject) {
+        return res.json({ success: false, msg: 'Failed to delete subject.' });
       }
       jwt.verify(token, config.secret, (err, user) => {
-        if (user._id != pokemon.author) {
+        if (user._id != subject.author) {
           return res.json({ success: false, msg: toTeamRocket });
         }
-        pokemon.remove();
+        subject.remove();
         return res.json({ success: true});
       });
     });
@@ -92,23 +92,23 @@ module.exports = {
     if (!imgExif || ['png', 'gif', 'jpg', 'jpeg'].indexOf(imgExt) < 0)  {
       return res.status(400).json({ success: false, msg: "Invalid image format." });
     }
-    Pokemon.findOne({number: req.params.number}, (err, pokemon) => {
-      if (err || !pokemon) {
-        return res.json({ success: false, msg: 'Failed to update pokemon image.' });
+    Subject.findOne({id: req.params.id}, (err, subject) => {
+      if (err || !subject) {
+        return res.json({ success: false, msg: 'Failed to update subject image.' });
       }
       jwt.verify(token, config.secret, (err, user) => {
-        if (user._id != pokemon.author) {
+        if (user._id != subject.author) {
           return res.json({ success: false, msg: toTeamRocket });
         }
-        const filename = pokemon.number + '.' + imgExt;
+        const filename = subject.id + '.' + imgExt;
         const filepath = __dirname + '/../public/images/' + filename;
         fs.writeFile(filepath, buffer.toString('binary'), "binary", (err) => {
           if (err) throw err;
-          pokemon.image = filename;
-          pokemon.save((err) => {
+          subject.image = filename;
+          subject.save((err) => {
             return (err)
-              ? res.json({ success: false, msg: 'Failed to update pokemon image.' })
-              : res.json({ success: true, pokemon: pokemon.format() });
+              ? res.json({ success: false, msg: 'Failed to update subject image.' })
+              : res.json({ success: true, subject: subject.format() });
           });
         });
       });

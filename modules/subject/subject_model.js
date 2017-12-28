@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const integerValidator = require('mongoose-integer');
 
-const PokemonSchema = new Schema({
-    number: {
-        type: Number,
+const SubjectSchema = new Schema({
+    id: {
+        type: String,
         unique: true,
-        integer: true,
         required: true
     },
     name: {
@@ -25,15 +23,14 @@ const PokemonSchema = new Schema({
     }
 });
 
-PokemonSchema.methods.format = function (omitAuthor = false) {
-  let pokemon = {
-    number: this.number,
+SubjectSchema.methods.format = function (showAuthor = false) {
+  let subject = {
+    id: this.id,
     name: this.name,
     image: this.image
   };
-  if (!omitAuthor) { pokemon.author = this.author; }
-  return pokemon;
+  if (showAuthor) { subject.author = this.author; }
+  return subject;
 };
 
-PokemonSchema.plugin(integerValidator);
-module.exports = mongoose.model('Pokemon', PokemonSchema);
+module.exports = mongoose.model('Subject', SubjectSchema);

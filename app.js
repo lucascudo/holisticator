@@ -10,7 +10,7 @@ const passport = require('passport');
 const fileUpload = require('express-fileupload');
 
 const config = require('./config/app');
-const pokemonRoutes = require('./modules/pokemon/pokemon_routes');
+const subjectRoutes = require('./modules/subject/subject_routes');
 const userRoutes = require('./modules/user/user_routes');
 const app = express();
 
@@ -37,7 +37,7 @@ app
 .set('view engine', 'jade')
 
 .use('/api', userRoutes)
-.use('/api/pokemon', pokemonRoutes)
+.use('/api/subject', subjectRoutes)
 .get('/', (req, res) => res.send('PokeStore is running!'))
 // catch 404 and forward to error handler
 .use((req, res, next) => {
