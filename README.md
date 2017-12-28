@@ -7,7 +7,7 @@ Run:
 ```
 npm install
 ```
-and create your very own .env file (there is an example on root directory).
+and create your very own *.env* file (there is an example on root directory).
 
 ## Run
 ```
