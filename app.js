@@ -35,10 +35,10 @@ app
 // view engine setup
 .set('views', path.join(__dirname, 'views'))
 .set('view engine', 'jade')
-
-.use('/api', userRoutes)
-.use('/api/subject', subjectRoutes)
-.get('/', (req, res) => res.send('PokeStore is running!'))
+// custom routes
+.get(config.uriRoot + '/', (req, res) => res.render('index', { title: config.title }))
+.use(config.uriRoot, userRoutes)
+.use(config.uriRoot + '/subject', subjectRoutes)
 // catch 404 and forward to error handler
 .use((req, res, next) => {
   let err = new Error('Not Found');

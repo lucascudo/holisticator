@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const findOrCreate = require('mongoose-findorcreate');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jsonwebtoken');
+const Schema = mongoose.Schema;
+
+const config = require('../../config/app'); 
 
 const UserSchema = new Schema({
     username: {
@@ -18,6 +22,8 @@ const UserSchema = new Schema({
         default: {}
     }
 });
+
+UserSchema.plugin(findOrCreate);
 
 UserSchema.pre('save', function (next) {
     let user = this;
@@ -38,5 +44,12 @@ UserSchema.methods.comparePassword = function (passw, cb) {
         cb(null, isMatch);
     });
 };
+
+UserSchema.methods.generateToken = function () {
+  return 'Bearer ' + jwt.sign({
+      _id: this._id,
+      username: this.username,
+  }, config.secret, { expiresIn: 3600 });
+}
 
 module.exports = mongoose.model('User', UserSchema);

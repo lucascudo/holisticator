@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const subjectCtl = require('./subject_controller');
 
-require('../../config/passport')(passport);
+require('../user/passport')(passport);
 
 router.get('/', subjectCtl.get)
 .get('/:id', subjectCtl.get)

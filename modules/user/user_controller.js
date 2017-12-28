@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 
 const config = require('../../config/app');
 const User = require("./user_model");
@@ -15,14 +14,9 @@ module.exports = {
     });
     // save the user
     newUser.save((err) => {
-      if (err) {
-        return res.json({success: false, msg: 'Username already exists.'})
-      }
-      const token = 'Bearer ' + jwt.sign({
-          _id: newUser._id,
-          username: newUser.username,
-      }, config.secret, { expiresIn: 3600 });
-      return res.json({ success: true, token: token });
+      return (err)
+        ? res.json({success: false, msg: 'Username already exists.'})
+        : res.json({ success: true, token: user.generateToken() });
     });
   },
 
@@ -31,20 +25,13 @@ module.exports = {
       username: req.body.username
     }, (err, user) => {
       if (err) throw err;
-      if (!user) {
-        return res.status(401).json({success: false, msg: 'Authentication failed. User not found.'});
-      }
-      // check if password matches
-      user.comparePassword(req.body.password, (err, isMatch) => {
-        if (!err && isMatch) {
-          const token = 'Bearer ' + jwt.sign({
-              _id: user._id,
-              username: user.username,
-          }, config.secret, { expiresIn: 3600 });
-          return res.json({success: true, token: token});
-        }
-        return res.status(401).json({success: false, msg: 'Authentication failed.'});
-      });
+      return (!user)
+        ? res.status(401).json({success: false, msg: 'Authentication failed. User not found.'})
+        : user.comparePassword(req.body.password, (err, isMatch) => {
+          return (err || !isMatch)
+            ? res.status(401).json({success: false, msg: 'Authentication failed.'})
+            : res.json({success: true, token: user.generateToken()});
+        });
     });
   }
 
