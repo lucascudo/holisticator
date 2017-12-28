@@ -18,7 +18,7 @@ module.exports = {
       if (err) {
         return res.json({success: false, msg: 'Username already exists.'})
       }
-      const token = 'JWT ' + jwt.sign({
+      const token = 'Bearer ' + jwt.sign({
           _id: newUser._id,
           username: newUser.username,
       }, config.secret, { expiresIn: 3600 });
@@ -37,7 +37,7 @@ module.exports = {
       // check if password matches
       user.comparePassword(req.body.password, (err, isMatch) => {
         if (!err && isMatch) {
-          const token = 'JWT ' + jwt.sign({
+          const token = 'Bearer ' + jwt.sign({
               _id: user._id,
               username: user.username,
           }, config.secret, { expiresIn: 3600 });

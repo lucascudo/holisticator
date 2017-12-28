@@ -7,7 +7,7 @@ const config = require('../../config/app');
 const getToken = require('../../utils/get_token');
 const Subject = require('./subject_model');
 
-const toTeamRocket = 'That subject is not yours!';
+const toScriptKiddos = 'That subject is not yours!';
 
 module.exports = {
 
@@ -51,7 +51,7 @@ module.exports = {
       }
       jwt.verify(token, config.secret, (err, user) => {
         if (user._id != subject.author) {
-          return res.json({ success: false, msg: toTeamRocket });
+          return res.json({ success: false, msg: toScriptKiddos });
         }
         subject.id = req.body.id || subject.id;
         subject.name = req.body.name || subject.name;
@@ -72,7 +72,7 @@ module.exports = {
       }
       jwt.verify(token, config.secret, (err, user) => {
         if (user._id != subject.author) {
-          return res.json({ success: false, msg: toTeamRocket });
+          return res.json({ success: false, msg: toScriptKiddos });
         }
         subject.remove();
         return res.json({ success: true});
@@ -98,7 +98,7 @@ module.exports = {
       }
       jwt.verify(token, config.secret, (err, user) => {
         if (user._id != subject.author) {
-          return res.json({ success: false, msg: toTeamRocket });
+          return res.json({ success: false, msg: toScriptKiddos });
         }
         const filename = subject.id + '.' + imgExt;
         const filepath = __dirname + '/../public/images/' + filename;
