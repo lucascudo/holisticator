@@ -74,8 +74,9 @@
 						"value": "application/json"
 					},
 					{
-						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQ0ZTc4NzZlNWFlYjE1Zjg4YmE2YTMiLCJ1c2VybmFtZSI6Imx1Y2FzLnNpc2F1QGdtYWlsLmNvbSIsImlhdCI6MTUxNDQ2NTE1OSwiZXhwIjoxNTE0NDY4NzU5fQ.-yBO4oH213zPo_rxMu9WO6wrSn8BIFn9RXwdH7-ymKY"
+						"key": "",
+						"value": "",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -115,8 +116,9 @@
 						"value": "application/json"
 					},
 					{
-						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTAxMDB9.Opw-Nw1P-dUDSjylk3XBRxV5DfHD_ll7R3btPMm5-2I"
+						"key": "",
+						"value": "",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -182,15 +184,15 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTY2NjJ9.VBwcAjw3ir68fXCsYRfpyTLfglAgAmi9RaIPn1wqut4"
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTY2NjJ9.VBwcAjw3ir68fXCsYRfpyTLfglAgAmi9RaIPn1wqut4"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Charmeleon\"\n}"
+					"raw": "{\n\t\"name\": \"Bulbasaur\"\n}"
 				},
 				"url": {
-					"raw": "localhost:3000/api/subject/5",
+					"raw": "localhost:3000/api/subject/1",
 					"host": [
 						"localhost"
 					],
@@ -198,7 +200,7 @@
 					"path": [
 						"api",
 						"subject",
-						"5"
+						"1"
 					]
 				},
 				"description": ""
@@ -216,7 +218,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTY2NjJ9.VBwcAjw3ir68fXCsYRfpyTLfglAgAmi9RaIPn1wqut4"
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQ0ZTc4NzZlNWFlYjE1Zjg4YmE2YTMiLCJ1c2VybmFtZSI6Imx1Y2FzLnNpc2F1QGdtYWlsLmNvbSIsImlhdCI6MTUxNDQ2NTE1OSwiZXhwIjoxNTE0NDY4NzU5fQ.-yBO4oH213zPo_rxMu9WO6wrSn8BIFn9RXwdH7-ymKY"
 					}
 				],
 				"body": {
@@ -224,15 +226,15 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:3000/api/pokemon/3",
+					"raw": "localhost:3000/api/subject/1",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"api",
-						"pokemon",
-						"3"
+						"subject",
+						"1"
 					]
 				},
 				"description": ""
@@ -250,7 +252,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYTFhODM4MjBkODRkZTA5ZjE4NDMiLCJpYXQiOjE1MTQzODE3MzZ9.g3RJJ4Znufknthiz6zSHJoJhf5LQnlxmRVEw_nujHi4"
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTQzYzI1NDBmODg1MDBkZjk3OTFkNzYiLCJpYXQiOjE1MTQzOTY2NjJ9.VBwcAjw3ir68fXCsYRfpyTLfglAgAmi9RaIPn1wqut4"
 					}
 				],
 				"body": {
@@ -258,9 +260,9 @@
 					"formdata": [
 						{
 							"key": "image",
-							"value": "",
 							"description": "",
-							"type": "file"
+							"type": "file",
+							"src": "Bulbasaur Pokemon Go.png"
 						}
 					]
 				},

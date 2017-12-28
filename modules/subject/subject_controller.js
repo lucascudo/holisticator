@@ -101,7 +101,7 @@ module.exports = {
           return res.json({ success: false, msg: toScriptKiddos });
         }
         const filename = subject.id + '.' + imgExt;
-        const filepath = __dirname + '/../public/images/' + filename;
+        const filepath = __dirname + '/../../public/images/' + filename;
         fs.writeFile(filepath, buffer.toString('binary'), "binary", (err) => {
           if (err) throw err;
           subject.image = filename;
