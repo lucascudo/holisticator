@@ -22,11 +22,11 @@ Import *postman_collection.json* to Postman and _voilà_!
 | Verb HTTP |                Route                        | Required Authentication | Params |
 |:---------:|:-------------------------------------------:|:-------:|-------:|
 | GET       | /api/subject                |            No           |
-| GET       | /api/subject/:number        |            No           |
+| GET       | /api/subject/:id            |            No           |
 | GET       | /api/oauth/google           |            No           |
 | POST      | /api/signup                 |            No           |{ "username": String, "password": String }
 | POST      | /api/signin                 |            No           |{ "username": String, "password": String }
-| POST      | /api/subject                |           Yes           |{ "number": Integer, "name": String }
-| PUT       | /api/subject/:number        |           Yes           |{ "number": Integer, "name": String }
-| DELETE    | /api/subject/:number        |           Yes           |
-| POST      | /api/subject/:number/image  |           Yes           |multipart/form-data with an input of type *file* and named as *image*
+| POST      | /api/subject                |           Yes           |{ "id": Integer, "name": String }
+| PUT       | /api/subject/:id            |           Yes           |{ "id": Integer, "name": String }
+| DELETE    | /api/subject/:id            |           Yes           |
+| POST      | /api/subject/:id/image      |           Yes           |multipart/form-data with an input of type *file* and named as *image*
