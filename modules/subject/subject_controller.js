@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const imageType = require('image-type');
 const readChunk = require('read-chunk');
-const fs = require('fs');
 
 const config = require('../../config/app');
 const getToken = require('../../utils/get_token');
@@ -100,16 +99,10 @@ module.exports = {
         if (user._id != subject.author) {
           return res.json({ success: false, msg: toScriptKiddos });
         }
-        const filename = subject.id + '.' + imgExt;
-        const filepath = __dirname + '/../../public/images/' + filename;
-        fs.writeFile(filepath, buffer.toString('binary'), "binary", (err) => {
-          if (err) throw err;
-          subject.image = filename;
-          subject.save((err) => {
-            return (err)
-              ? res.json({ success: false, msg: 'Failed to update subject image.' })
-              : res.json({ success: true, subject: subject.format() });
-          });
+        subject.addImage(buffer, imgExt, (err) => {
+          return (err)
+            ? res.json({ success: false, msg: 'Failed to update subject image.' })
+            : res.json({ success: true, subject: subject.format() });
         });
       });
     });
