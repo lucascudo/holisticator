@@ -16,7 +16,7 @@ module.exports = {
     newUser.save((err) => {
       return (err)
         ? res.json({success: false, msg: 'Username already exists.'})
-        : res.json({ success: true, token: user.generateToken() });
+        : res.json({ success: true, token: newUser.generateToken() });
     });
   },
 

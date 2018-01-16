@@ -87,8 +87,7 @@ module.exports = {
     const image = req.files.image;
     const buffer = image.data;
     const imgExif = imageType(buffer);
-    const imgExt = imageType(buffer).ext;
-    if (!imgExif || ['png', 'gif', 'jpg', 'jpeg'].indexOf(imgExt) < 0)  {
+    if (!imgExif || ['png', 'gif', 'jpg', 'jpeg'].indexOf(imgExif.ext) < 0)  {
       return res.status(400).json({ success: false, msg: "Invalid image format." });
     }
     Subject.findOne({id: req.params.id}, (err, subject) => {
@@ -99,7 +98,7 @@ module.exports = {
         if (user._id != subject.author) {
           return res.json({ success: false, msg: toScriptKiddos });
         }
-        subject.addImage(buffer, imgExt, (err) => {
+        subject.addImage(buffer, imgExif.ext, (err) => {
           return (err)
             ? res.json({ success: false, msg: 'Failed to update subject image.' })
             : res.json({ success: true, subject: subject.format() });
