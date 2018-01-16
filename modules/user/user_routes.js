@@ -7,7 +7,9 @@ require('./passport')(passport);
 
 router.post('/signup', userCtl.signup)
 .post('/signin', userCtl.signin)
+.get('/oauth/facebook', passport.authenticate('facebook', { session: false }))
 .get('/oauth/google', passport.authenticate('google', {
+  session: false,
   scope: [
     // View your email address
     'https://www.googleapis.com/auth/userinfo.email',
@@ -29,8 +31,12 @@ router.post('/signup', userCtl.signup)
     //'https://www.googleapis.com/auth/contacts',
   ]
 }))
-.get('/oauth/google/callback', passport.authenticate('google', { session: false}), (req, res) =>
-  res.json({success: true, token: req.user.generateToken()}));
+.get('/oauth/google/callback', passport.authenticate('google', { session: false }), (req, res) => {
+  res.json({success: true, token: req.user.generateToken()});
+})
+.get('/oauth/facebook/callback', passport.authenticate('facebook', { session: false }), (req, res) => {
+  res.json({success: true, token: req.user.generateToken()});
+});
 
 
 module.exports = router;
