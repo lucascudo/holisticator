@@ -5,7 +5,7 @@ RESTful API with authentication
 Node.js, NPM and Neo4j DB Server.
 
 ## Setup
-create your very own *.env* file (there is an example on root directory) and run:
+create your very own *.env* file (there is an example on root directory) and run-
 ```
 npm install
 ```
@@ -18,7 +18,8 @@ npm start
 ## Test
 Import *postman_collection.json* to your local Postman`s instance and _voilà_!
 
-|:---------:|:-------------------------------------------:|:-------:|-------:|
+| Verb HTTP |             Route             | Requires Authentication | Params |
+|:---------:|:-----------------------------:|:-----------------------:|-------:|
 | GET       | /api/subject                  |            No           |
 | GET       | /api/subject/:id              |            No           |
 | GET       | /api/oauth/google             |            No           |
