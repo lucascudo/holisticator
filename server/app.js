@@ -36,9 +36,7 @@ app
 .set('views', path.join(__dirname, 'views'))
 .set('view engine', 'jade')
 // custom routes
-.get('/', (req, res) => {
-  res.redirect(config.uriRoot);
-})
+.get('/', (req, res) => res.redirect(config.uriRoot))
 .get(config.uriRoot + '/', (req, res) => res.render('index', { title: config.title }))
 .use(config.uriRoot, userRoutes)
 .use(config.uriRoot + '/subject', subjectRoutes)
