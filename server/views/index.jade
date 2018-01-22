@@ -8,7 +8,7 @@ block content
       tr
         th(style='text-align:center') Verb HTTP
         th(style='text-align:center') Route
-        th(style='text-align:center') Required Authentication
+        th(style='text-align:center') Requires Authentication
         th(style='text-align:right') Params
     tbody
       tr
@@ -19,7 +19,7 @@ block content
       tr
         td(style='text-align:center') GET
         td(style='text-align:center')
-          a(href='/api/subject/:number') /api/subject/:number
+          a(href='/api/subject/:id') /api/subject/:id
         td(style='text-align:center') No
       tr
         td(style='text-align:center') GET
@@ -62,18 +62,18 @@ block content
       tr
         td(style='text-align:center') PUT
         td(style='text-align:center')
-          a(href='/api/subject/:number') /api/subject/:number
+          a(href='/api/subject/:id') /api/subject/:id
         td(style='text-align:center') Yes
         td(style='text-align:right') { &quot;number&quot;: Integer, &quot;name&quot;: String }
       tr
         td(style='text-align:center') DELETE
         td(style='text-align:center')
-          a(href='/api/subject/:number') /api/subject/:number
+          a(href='/api/subject/:id') /api/subject/:id
         td(style='text-align:center') Yes
       tr
         td(style='text-align:center') POST
         td(style='text-align:center')
-          a(href='/api/subject/:number/image') /api/subject/:number/image
+          a(href='/api/subject/:id/image') /api/subject/:id/image
         td(style='text-align:center') Yes
         td(style='text-align:right')
           | multipart/form-data with an input of type
