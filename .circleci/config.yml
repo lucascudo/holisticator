@@ -19,6 +19,7 @@ jobs:
 
     steps:
       - checkout
+      - run: cd server
       - run: pwd
       - run: ls
       # Download and cache dependencies
