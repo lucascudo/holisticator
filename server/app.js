@@ -4,18 +4,21 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
+const config = require('config');
 
-const config = require('./config/app');
 const subjectRoutes = require('./modules/subject/subject_routes');
 const userRoutes = require('./modules/user/user_routes');
 const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.databaseUri, {useMongoClient: true});
+
+if (config.util.getEnv('NODE_ENV') !== 'test') {
+    app.use(logger('combined')); //'combined' outputs the Apache style LOGs
+}
 
 app
 .use(logger('dev'))

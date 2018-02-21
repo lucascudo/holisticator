@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const imageType = require('image-type');
 const readChunk = require('read-chunk');
-
-const config = require('../../config/app');
+const config = require('config');
 const getToken = require('../../utils/get_token');
 const Subject = require('./subject_model');
 

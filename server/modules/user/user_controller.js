@@ -1,5 +1,4 @@
-
-const config = require('../../config/app');
+const config = require('config');
 const User = require("./user_model");
 
 module.exports = {

@@ -3,8 +3,7 @@ const findOrCreate = require('mongoose-findorcreate');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 const Schema = mongoose.Schema;
-
-const config = require('../../config/app'); 
+const config = require('config');
 
 const UserSchema = new Schema({
     username: {
