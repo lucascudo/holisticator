@@ -2,7 +2,7 @@
 RESTful API with authentication
 
 ## Requirements
-Node.js, NPM and Neo4j DB Server.
+Node.js, NPM and MongoDB.
 
 ## Setup
 create your very own *.env* file (there is an example on root directory) and run-
