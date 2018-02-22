@@ -9,5 +9,6 @@
   "gClientSecret": "GOOGLE_CLIENT_SECRET",
 
   "fAppID": "FACEBOOK_APP_ID",
-  "fAppScret": "FACEBOOK_APP_SECRET"
+  "fAppScret": "FACEBOOK_APP_SECRET",
+  "apiRoot": "/api"
 }

@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'test';
 
 let mongoose = require('mongoose');
 let config = require('config');
-let Subject = require('../modules/subject/subject_model');
+let User = require('../modules/user/user_model');
 
 //Require the dev-dependencies
 let chai = require('chai');
@@ -11,22 +11,29 @@ let server = require('../app');
 let should = chai.should();
 
 chai.use(chaiHttp);
-describe('Subjects', () => {
+describe('Users', () => {
   beforeEach((done) => { //Before each test we empty the database
-      done();
+      User.remove({}, (err) => {
+        done();
+      });
   });
 
   /*
   * Test the /GET route
   */
-  describe('/GET subject', () => {
-      it('it should GET an empty list of subjects', (done) => {
+  describe('/GET user', () => {
+      it('it should create a new user', (done) => {
         chai.request(server)
-            .get(config.apiRoot + '/subject')
+            .post(config.apiRoot + '/signup')
+            .send({
+              'username': 'lucas',
+              'password': 'lucas'
+            })
             .end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.length.should.be.eql(0);
+                res.body.should.be.an('object');
+                res.body.should.have.property('success');
+                res.body.success.should.be.true;
                 done();
             });
       });
