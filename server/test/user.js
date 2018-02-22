@@ -12,31 +12,62 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 describe('Users', () => {
-  beforeEach((done) => { //Before each test we empty the database
-      User.remove({}, (err) => {
-        done();
-      });
+
+  let credentials = {
+    'username': 'lucas',
+    'password': 'lucas'
+  };
+
+  before((done) => { //Before all tests we empty the database
+    User.remove({}, (err) => {
+      done();
+    });
   });
 
   /*
-  * Test the /GET route
+  * Test the /signup route
   */
-  describe('/GET user', () => {
-      it('it should create a new user', (done) => {
-        chai.request(server)
-            .post(config.apiRoot + '/signup')
-            .send({
-              'username': 'lucas',
-              'password': 'lucas'
-            })
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.an('object');
-                res.body.should.have.property('success');
-                res.body.success.should.be.true;
-                done();
-            });
-      });
+  describe('/POST signup', () => {
+    it('it should not create a user with no data', (done) => {
+      chai.request(server)
+        .post(config.apiRoot + '/signup')
+        .send()
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          res.body.should.have.property('success');
+          res.body.success.should.be.false;
+          done();
+        });
+    });
+    it('it should create a new user', (done) => {
+      chai.request(server)
+        .post(config.apiRoot + '/signup')
+        .send(credentials)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          res.body.should.have.property('success');
+          res.body.success.should.be.true;
+          done();
+        });
+    });
   });
+
+    /*
+    * Test the /signin route
+    */
+    describe('/POST signin', () => {
+      it('it should authenticate a user', (done) => {
+        chai.request(server)
+          .post(config.apiRoot + '/signin')
+          .send(credentials)
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.an('object');
+            res.body.should.have.property('success');
+            res.body.success.should.be.true;
+            done();
+          });
+      });
+    });
 
 });
