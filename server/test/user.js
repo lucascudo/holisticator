@@ -1,8 +1,5 @@
 process.env.NODE_ENV = 'test';
-
-let mongoose = require('mongoose');
 let config = require('config');
-let User = require('../modules/user/user_model');
 
 //Require the dev-dependencies
 let chai = require('chai');
@@ -22,7 +19,7 @@ describe('Users', () => {
   * Test the /signup route
   */
   describe('/POST signup', () => {
-    it('it should not create a user with no data', (done) => {
+    it('shouldn\'t create a user with no data', (done) => {
       chai.request(server)
         .post(config.apiRoot + '/signup')
         .send()
@@ -33,7 +30,7 @@ describe('Users', () => {
           done();
         });
     });
-    it('it should create a new user', (done) => {
+    it('should create a new user', (done) => {
       chai.request(server)
         .post(config.apiRoot + '/signup')
         .send(credentials)
@@ -41,6 +38,9 @@ describe('Users', () => {
           res.body.should.be.an('object');
           res.body.should.have.property('success');
           res.body.success.should.be.true;
+          res.body.should.have.property('token');
+          res.body.token.should.be.a('string');
+          credentials.token = res.body.token;
           done();
         });
     });
@@ -50,18 +50,33 @@ describe('Users', () => {
     * Test the /signin route
     */
     describe('/POST signin', () => {
-      it('it should authenticate a user', (done) => {
-        chai.request(server)
-          .post(config.apiRoot + '/signin')
-          .send(credentials)
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.an('object');
-            res.body.should.have.property('success');
-            res.body.success.should.be.true;
-            done();
-          });
-      });
+        it('shouldn\'t authenticate a user with wrong credentials', (done) => {
+          chai.request(server)
+            .post(config.apiRoot + '/signin')
+            .send({
+                username: credentials.username,
+                password: 'Wrong Password'
+            })
+            .end((err, res) => {
+              res.should.have.status(401);
+              res.body.should.be.an('object');
+              res.body.should.have.property('success');
+              res.body.success.should.be.false;
+              done();
+            });
+        });
+        it('should authenticate a user with correct credentials', (done) => {
+          chai.request(server)
+            .post(config.apiRoot + '/signin')
+            .send(credentials)
+            .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.an('object');
+              res.body.should.have.property('success');
+              res.body.success.should.be.true;
+              done();
+            });
+        });
     });
 
 });
