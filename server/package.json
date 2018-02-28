@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "export NODE_ENV=dev && node ./bin/www",
-    "test": "mocha --exit"
+    "test": "mocha --exit --timeout 12000"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
