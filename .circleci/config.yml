@@ -32,4 +32,5 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "server/package.json" }}
       # run tests!
+      - run: echo $NODE_ENV
       - run: cd server && npm t
