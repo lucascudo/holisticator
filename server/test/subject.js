@@ -12,9 +12,6 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 describe('Subjects', () => {
-  beforeEach((done) => { //Before each test we empty the database
-      done();
-  });
 
   /*
   * Test the /GET route

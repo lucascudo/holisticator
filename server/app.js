@@ -14,7 +14,15 @@ const userRoutes = require('./modules/user/user_routes');
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.databaseUri, {useMongoClient: true});
+if (process.env.NODE_ENV === 'test') {
+    let Mockgoose = require('mockgoose').Mockgoose;
+    let mockgoose = new Mockgoose(mongoose);
+    mockgoose.prepareStorage().then(() => {
+        mongoose.connect(config.databaseUri, {useMongoClient: true});
+    });
+} else {
+    mongoose.connect(config.databaseUri, {useMongoClient: true});
+}
 
 if (config.util.getEnv('NODE_ENV') !== 'test') {
     app.use(logger('combined')); //'combined' outputs the Apache style LOGs

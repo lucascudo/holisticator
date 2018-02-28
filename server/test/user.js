@@ -18,12 +18,6 @@ describe('Users', () => {
     'password': 'lucas'
   };
 
-  before((done) => { //Before all tests we empty the database
-    User.remove({}, (err) => {
-      done();
-    });
-  });
-
   /*
   * Test the /signup route
   */
